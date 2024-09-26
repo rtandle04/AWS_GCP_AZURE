@@ -1,3 +1,24 @@
 Python code to read the data from SQS to Lambda function
 
+def lambda_handler(event, context):
+    for message in event['Records']:
+        process_message(message)
+    print("done")
+
+data = {"name":"Ramakanth","age":"30"}
+
+def process_message(message):
+    try:
+        print(f"Processed message {message['body']}")
+        if message['body']['Type'] == 'Notification':
+           print('if condition successded')
+           finalBody = {
+            "name":message['body']['name'],
+            "id":message['body']['id'],
+            "iscompleted":message['body'][status] }
+          print(finalBody)  
+        # TODO: Do interesting work based on the new message
+    except Exception as err:
+        print("An error occurred")
+        raise err
 
